@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+
+  <context id="DB2Tables" targetRuntime="MyBatis3">
+  
+  	<!-- 去掉代码中的注释 -->
+ 	<commentGenerator >
+		<property name="suppressAllComments" value="true"/>
+	</commentGenerator>
+	
+    <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+        connectionURL="jdbc:mysql://localhost:3306/projectmanager"
+        userId="root"
+        password="root">
+    </jdbcConnection>
+
+    <javaTypeResolver >
+      <property name="forceBigDecimals" value="false" />
+    </javaTypeResolver>
+
+	<!--  生成的Java模型放在哪个包中-->
+    <javaModelGenerator targetPackage="com.ujiuye.bean" targetProject=".\src\main\java">
+      <property name="enableSubPackages" value="true" />
+      <property name="trimStrings" value="true" />
+    </javaModelGenerator>
+
+	<!--mapper.xml 映射文件放在哪个包 -->
+    <sqlMapGenerator targetPackage="mapper"  targetProject=".\src\main\resources">
+      <property name="enableSubPackages" value="true" />
+    </sqlMapGenerator>
+
+	<!-- mapper接口存放位置 -->
+    <javaClientGenerator type="XMLMAPPER" targetPackage="com.ujiuye.mapper"  targetProject=".\src\main\java">
+      <property name="enableSubPackages" value="true" />
+    </javaClientGenerator>
+
+	<!-- 对哪些表进行逆向工程 -->
+	<table tableName="analysis"></table>
+	<table tableName="attachment"></table>
+	<table tableName="customer"></table>
+	<table tableName="email"></table>
+	<table tableName="employee"></table>
+	<table tableName="function"></table>
+	<table tableName="module"></table>
+	<table tableName="position"></table>
+	<table tableName="project"></table>
+	<table tableName="task"></table>
+	
+	
+   <!--  <table schema="DB2ADMIN" tableName="ALLTYPES" domainObjectName="Customer" >
+      <property name="useActualColumnNames" value="true"/>
+      <generatedKey column="ID" sqlStatement="DB2" identity="true" />
+      <columnOverride column="DATE_FIELD" property="startDate" />
+      <ignoreColumn column="FRED" />
+      <columnOverride column="LONG_VARCHAR_FIELD" jdbcType="VARCHAR" />
+    </table> -->
+    
+
+  </context>
+</generatorConfiguration>

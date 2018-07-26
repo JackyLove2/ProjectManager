@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ujiuye.mapper.ModuleMapper">
+  <resultMap id="BaseResultMap" type="com.ujiuye.bean.Module">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="proname" jdbcType="VARCHAR" property="proname" />
+    <result column="analysis_fk" jdbcType="INTEGER" property="analysisFk" />
+    <result column="modname" jdbcType="VARCHAR" property="modname" />
+    <result column="level" jdbcType="VARCHAR" property="level" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.ujiuye.bean.ModuleWithBLOBs">
+    <result column="simpledis" jdbcType="LONGVARCHAR" property="simpledis" />
+    <result column="detaileddis" jdbcType="LONGVARCHAR" property="detaileddis" />
+    <result column="remark" jdbcType="LONGVARCHAR" property="remark" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, proname, analysis_fk, modname, level
+  </sql>
+  <sql id="Blob_Column_List">
+    simpledis, detaileddis, remark
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.ujiuye.bean.ModuleExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from module
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.ujiuye.bean.ModuleExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from module
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from module
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from module
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ujiuye.bean.ModuleExample">
+    delete from module
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ujiuye.bean.ModuleWithBLOBs">
+    insert into module (id, proname, analysis_fk, 
+      modname, level, simpledis, 
+      detaileddis, remark)
+    values (#{id,jdbcType=INTEGER}, #{proname,jdbcType=VARCHAR}, #{analysisFk,jdbcType=INTEGER}, 
+      #{modname,jdbcType=VARCHAR}, #{level,jdbcType=VARCHAR}, #{simpledis,jdbcType=LONGVARCHAR}, 
+      #{detaileddis,jdbcType=LONGVARCHAR}, #{remark,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ujiuye.bean.ModuleWithBLOBs">
+    insert into module
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="proname != null">
+        proname,
+      </if>
+      <if test="analysisFk != null">
+        analysis_fk,
+      </if>
+      <if test="modname != null">
+        modname,
+      </if>
+      <if test="level != null">
+        level,
+      </if>
+      <if test="simpledis != null">
+        simpledis,
+      </if>
+      <if test="detaileddis != null">
+        detaileddis,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="proname != null">
+        #{proname,jdbcType=VARCHAR},
+      </if>
+      <if test="analysisFk != null">
+        #{analysisFk,jdbcType=INTEGER},
+      </if>
+      <if test="modname != null">
+        #{modname,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null">
+        #{level,jdbcType=VARCHAR},
+      </if>
+      <if test="simpledis != null">
+        #{simpledis,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="detaileddis != null">
+        #{detaileddis,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ujiuye.bean.ModuleExample" resultType="java.lang.Long">
+    select count(*) from module
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update module
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.proname != null">
+        proname = #{record.proname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.analysisFk != null">
+        analysis_fk = #{record.analysisFk,jdbcType=INTEGER},
+      </if>
+      <if test="record.modname != null">
+        modname = #{record.modname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.level != null">
+        level = #{record.level,jdbcType=VARCHAR},
+      </if>
+      <if test="record.simpledis != null">
+        simpledis = #{record.simpledis,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.detaileddis != null">
+        detaileddis = #{record.detaileddis,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.remark != null">
+        remark = #{record.remark,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update module
+    set id = #{record.id,jdbcType=INTEGER},
+      proname = #{record.proname,jdbcType=VARCHAR},
+      analysis_fk = #{record.analysisFk,jdbcType=INTEGER},
+      modname = #{record.modname,jdbcType=VARCHAR},
+      level = #{record.level,jdbcType=VARCHAR},
+      simpledis = #{record.simpledis,jdbcType=LONGVARCHAR},
+      detaileddis = #{record.detaileddis,jdbcType=LONGVARCHAR},
+      remark = #{record.remark,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update module
+    set id = #{record.id,jdbcType=INTEGER},
+      proname = #{record.proname,jdbcType=VARCHAR},
+      analysis_fk = #{record.analysisFk,jdbcType=INTEGER},
+      modname = #{record.modname,jdbcType=VARCHAR},
+      level = #{record.level,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ujiuye.bean.ModuleWithBLOBs">
+    update module
+    <set>
+      <if test="proname != null">
+        proname = #{proname,jdbcType=VARCHAR},
+      </if>
+      <if test="analysisFk != null">
+        analysis_fk = #{analysisFk,jdbcType=INTEGER},
+      </if>
+      <if test="modname != null">
+        modname = #{modname,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null">
+        level = #{level,jdbcType=VARCHAR},
+      </if>
+      <if test="simpledis != null">
+        simpledis = #{simpledis,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="detaileddis != null">
+        detaileddis = #{detaileddis,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.ujiuye.bean.ModuleWithBLOBs">
+    update module
+    set proname = #{proname,jdbcType=VARCHAR},
+      analysis_fk = #{analysisFk,jdbcType=INTEGER},
+      modname = #{modname,jdbcType=VARCHAR},
+      level = #{level,jdbcType=VARCHAR},
+      simpledis = #{simpledis,jdbcType=LONGVARCHAR},
+      detaileddis = #{detaileddis,jdbcType=LONGVARCHAR},
+      remark = #{remark,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ujiuye.bean.Module">
+    update module
+    set proname = #{proname,jdbcType=VARCHAR},
+      analysis_fk = #{analysisFk,jdbcType=INTEGER},
+      modname = #{modname,jdbcType=VARCHAR},
+      level = #{level,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

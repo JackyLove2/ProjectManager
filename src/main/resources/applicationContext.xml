@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+   <!-- 开启注解模式，可以省略-->
+    <context:annotation-config />
+
+    <context:component-scan base-package="com.ujiuye" >
+        <!--不扫描控制器。  -->
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+
+
+    <!-- 整合Mybatis框架来连接数据库 -->
+    <!-- 引入数据库的配置文件 -->
+    <context:property-placeholder location="classpath:db.properties"/>
+    <!-- 使用c3p0读取外部properties文件配置数据源对象 -->
+    <bean name="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <!-- 配置数据源基本信息 -->
+        <property name="driverClass" value="${driverClass}"></property>
+        <property name="jdbcUrl" value="${jdbcUrl}"></property>
+        <property name="user" value="${user}"></property>
+        <property name="password" value="${password}"></property>
+
+    </bean>
+
+    <!-- 配置管理session工厂对象 -->
+    <bean name="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!--该名称dataSource是固定的，用于ComboPooledDataSource类中的setter注入  -->
+        <property name="dataSource" ref="dataSource"></property><!-- 需要引入数据源  -->
+        <!-- 需要读取Mybatis的配置文件 -->
+        <property name="configLocation" value="classpath:sqlMapConfig.xml"></property>
+        <!-- 扫描mapper.xml -->
+        <property name="mapperLocations" value="classpath:mapper/*.xml"></property>
+    </bean>
+
+    <!-- 使用mapper扫描配置来扫描mapper接口 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.ujiuye.mapper"/>
+    </bean>
+
+    <!-- 声明一个事务管理器，使用jdk的数据源事务管理   不建议使用注解模式管理事务，不灵活<tx:annotation-driven/> -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <!-- 控制住数据源才能管理 -->
+        <property name="dataSource" ref="dataSource"></property>
+    </bean>
+
+
+    <!-- advice,advisor:通知,通告 -->
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="get*" propagation="SUPPORTS" read-only="true" isolation="READ_COMMITTED"/>
+            <tx:method name="*" read-only="false" isolation="READ_COMMITTED"/>
+        </tx:attributes>
+    </tx:advice>
+
+    <aop:config>
+        <aop:pointcut expression="execution(* com.ujiuye.serviceimpl.*.*(..))" id="mypointcut"/>
+        <!-- 引用上面配置好的通知和切入点 -->
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="mypointcut" />
+    </aop:config>
+
+</beans>
