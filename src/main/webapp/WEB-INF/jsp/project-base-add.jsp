@@ -4,8 +4,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>添加项目信息</title>
-<link rel="stylesheet" type="text/css" href="skin/css/base.css">
-<script type="text/javascript" src="js/jquery-1.8.1.js"></script>
+<link rel="stylesheet" type="text/css" href="/ProjectManager/static/skin/css/base.css">
+<script type="text/javascript" src="/ProjectManager/static/js/jquery-1.8.1.js"></script>
 <script type="text/javascript">
     function change(){
         
@@ -17,16 +17,16 @@
     }
 </script>
 </head>
-<body leftmargin="8" topmargin="8" background='skin/images/allbg.gif'>
+<body leftmargin="8" topmargin="8" >
 
 <!--  快速转换位置按钮  -->
 <table width="98%" border="0" cellpadding="0" cellspacing="1" bgcolor="#D1DDAA" align="center">
 <tr>
- <td height="26" background="skin/images/newlinebg3.gif">
+ <td height="26" >
   <table width="58%" border="0" cellspacing="0" cellpadding="0">
   <tr>
   <td >
-    当前位置:项目管理>>添加项目基本信息
+    当前位置:项目管理>><a href="#" onclick="history.back()">基本信息管理 </a>>>添加项目基本信息
  </td>
  </tr>
 </table>
@@ -38,7 +38,7 @@
 
 <table width="98%" border="0" cellpadding="2" cellspacing="1" bgcolor="#D1DDAA" align="center" style="margin-top:8px">
 <tr bgcolor="#E7E7E7">
-	<td height="24" colspan="12" background="skin/images/tbg.gif">&nbsp;添加新项目信息&nbsp;</td>
+	<td height="24" colspan="12" >&nbsp;添加新项目信息&nbsp;</td>
 </tr>
 <tr >
 	<td align="right" bgcolor="#FAFAF1" height="22" >项目名称：</td>
@@ -83,7 +83,7 @@
 <td height="28" colspan=4 align=center>
 	&nbsp;
 	<A class="coolbg" onclick="commit()" >保存</A>
-	<a href="project-base.jsp" class="coolbg">返回</a>
+	<a href="#" onclick="history.back()" class="coolbg">返回</a>
 </td>
 </tr>
 </table>

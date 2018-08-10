@@ -28,7 +28,8 @@
        }
        if (choice=='no') {
                window.opener=null;
-               window.open('','_self');window.close();
+               window.open('','_self');
+               window.close();
        }
     }
 </script>

@@ -4,14 +4,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
 <title>任务信息</title>
-<link rel="stylesheet" type="text/css" href="skin/css/base.css">
+<link rel="stylesheet" type="text/css" href="/ProjectManager/static/skin/css/base.css">
 </head>
-<body leftmargin="8" topmargin="8" background='skin/images/allbg.gif'>
+<body leftmargin="8" topmargin="8" >
 
 <!--  快速转换位置按钮  -->
 <table width="98%" border="0" cellpadding="0" cellspacing="1" bgcolor="#D1DDAA" align="center">
 <tr>
- <td height="26" background="skin/images/newlinebg3.gif">
+ <td height="26" >
   <table width="58%" border="0" cellspacing="0" cellpadding="0">
   <tr>
   <td >
@@ -28,11 +28,11 @@
 <input type='hidden' name='dopost' value='' />
 <table width='98%'  border='0' cellpadding='1' cellspacing='1' bgcolor='#CBD8AC' align="center" style="margin-top:8px">
   <tr bgcolor='#EEF4EA'>
-    <td background='skin/images/wbg.gif' align='center'>
+    <td background='/ProjectManager/static/skin/images/frame/wbg.gif' align='center'>
       <table border='0' cellpadding='0' cellspacing='0'>
         <tr> <td width='90' align='center'>状态：</td>
           <td width='160'>
-          <select name='cid' style='width:150'>
+          <select name='cid' style='width:150px'>
           <option value='0'>请选择</option>
           	<option value='1'>未开始</option>
           	<option value='1'>进行中</option>
@@ -41,7 +41,7 @@
         </td>
           <td width='90' align='center'>搜索条件：</td>
           <td width='160'>
-          <select name='cid' style='width:150'>
+          <select name='cid' style='width:150px'>
           <option value='0'>选择类型...</option>
           	<option value='1'>任务标题</option>
           	<option value='1'>执行者</option>
@@ -61,7 +61,7 @@
       	</select>
         </td>
         <td>
-          &nbsp;&nbsp;&nbsp;<input name="imageField" type="image" src="skin/images/frame/search.gif" width="45" height="20" border="0" class="np" />
+          &nbsp;&nbsp;&nbsp;<input name="imageField" type="image" src="/ProjectManager/static/skin/images/frame/search.gif" width="45" height="20" border="0" class="np" />
         </td>
        </tr>
       </table>
@@ -74,7 +74,7 @@
 
 <table width="98%" border="0" cellpadding="2" cellspacing="1" bgcolor="#D1DDAA" align="center" style="margin-top:8px">
 <tr bgcolor="#E7E7E7">
-	<td height="24" colspan="12" background="skin/images/tbg.gif">&nbsp;任务信息&nbsp;</td>
+	<td height="24" colspan="12" >&nbsp;任务信息&nbsp;</td>
 </tr>
 <tr align="center" bgcolor="#FAFAF1" height="22">
 	<td width="4%">选择</td>
@@ -97,7 +97,7 @@
 	<td align="center">高</td>
 	<td>2015-02-03</td>
 	<td>2015-02-15</td>
-	<td><a >开始任务</a> | <a >任务完成</a> | <a href="task-edit.jsp">编辑</a> | <a href="task-look.jsp">查看详情</a></td>
+	<td><a >开始任务</a> | <a >任务完成</a> | <a href="/ProjectManager/skip.action?path=task-edit.jsp">编辑</a> | <a href="/ProjectManager/skip.action?path=task-look.jsp">查看详情</a></td>
 </tr>
 
 

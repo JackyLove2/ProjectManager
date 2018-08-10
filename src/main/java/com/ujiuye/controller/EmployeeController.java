@@ -16,7 +16,6 @@ public class EmployeeController {
     @Resource
     private EmployeeService employeeService;
 
-
     @RequestMapping("get_all")
     @ResponseBody
     public List<Employee> get_all(){
