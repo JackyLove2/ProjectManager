@@ -16,8 +16,8 @@ public class PositionServiceImpl implements PositionService {
     private PositionMapper positionMapper;
 
     @Override
-    public List<Position> get_all_position(HashMap<String, Object> map) {
-        List<Position> list = positionMapper.get_all(map);
+    public List<Position> getPosition(HashMap<String, Object> map) {
+        List<Position> list = positionMapper.getPosition(map);
         return list;
     }
 }

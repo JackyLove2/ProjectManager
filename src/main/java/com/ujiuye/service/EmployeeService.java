@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface EmployeeService {
 
-    List<Employee> get_all(HashMap<String,Object> map);
+    List<Employee> getEmployee(HashMap<String,Object> map);
 
-    int add_one(Employee emp);
+    int addOne(Employee emp);
 }

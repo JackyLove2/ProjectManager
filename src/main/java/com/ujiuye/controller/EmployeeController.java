@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
 import java.util.List;
 
 @Controller
@@ -16,21 +17,26 @@ public class EmployeeController {
     @Resource
     private EmployeeService employeeService;
 
-    @RequestMapping("get_all")
+    @RequestMapping("getEmployee")
     @ResponseBody
-    public List<Employee> get_all(){
-        List<Employee> list = employeeService.get_all(null);
+    public List<Employee> getOne(String eid){
+        List<Employee> list = null;
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("eid",eid);
+        list = employeeService.getEmployee(map);
         return list;
     }
 
-    @RequestMapping("add_one")
-    public String add_one(Employee employee ){
+    @RequestMapping("addOne")
+    public String addOne(Employee employee ){
         System.out.println(employee.toString());
-        int status = employeeService.add_one(employee);
+        int status = employeeService.addOne(employee);
         if(status > 0){
             return "user";
         }
         return "error";
     }
+
+
 
 }

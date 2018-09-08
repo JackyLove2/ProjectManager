@@ -162,7 +162,12 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
   
-  <select id="get_all" parameterType="hashmap" resultMap="BaseResultMap">
+  <select id="getPosition" parameterType="hashmap" resultMap="BaseResultMap">
     select * from position
+    <trim prefix="where" prefixOverrides="and|or" suffixOverrides=",">
+       <if test="id!=null">
+         id = #{id}
+       </if>
+    </trim>
   </select>
 </mapper>

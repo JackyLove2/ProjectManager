@@ -11,25 +11,29 @@
             $.ajax({
                 type:"post",
                 dataType:"JSON",
-                url:"/ProjectManager/employee/get_all.action",
+                url:"/ProjectManager/employee/getEmployee.action",
                 data:{},
                 async:true,
                 success:function (resultData) {
                     $(resultData).each(function (index,item) {
-                            var tr = "<tr align='center' bgcolor='#FFFFFF' onMouseMove=\"javascript:this.bgColor='#FCFDEE'\"" +
+                            var date = new Date()
+                            date.setTime(item.hiredate)
+                            //或者var date = new Date(item.hiredate)
+                            var ndate = date.getFullYear() + "年" + date.getMonth() + "月" + date.getDate() +"日"
+                            var tr = "<tr align='center' bgcolor='#FFFFFF' onMouseMove=\"javascript:this.bgColor='#FCFDEE'\""+
                                 "onMouseOut=\"javascript:this.bgColor='#FFFFFF';\" height='22px'>" +
-                                "<td><input name='id' type='checkbox' value='"+item.eid+"' value='101' class='np'></td>" +
-                                "<td>"+index+1+"</td>" +
+                                "<td><input name='eid' type='checkbox' value='"+item.eid+"' class='np'></td>" +
+                                "<td>"+(index+1)+"</td>" +
                                 "<td>"+item.ename+"</td>" +
-                                "<td align='center'>"+"item.position"+"</td>" +
+                                "<td align='center'>"+item.pFk+"</td>" +
                                 "<td>"+item.esex+"</td>" +
                                 "<td>"+item.eage+"</td>" +
                                 "<td>"+item.telephone+"</td>" +
-                                "<td>"+itme.hiredate+"</td>" +
-                                "<td><a>删除</a> | <a href='/ProjectManager/skip.action?path=user-edit.jsp'>编辑</a> | " +
+                                "<td>"+ndate+"</td>" +
+                                "<td><a>删除</a> | <a href='/ProjectManager/skip.action?path=user-edit.jsp&eid="+item.eid+"'>编辑</a> | " +
                                 "<a href='/ProjectManager/skip.action?path=user-look.jsp'>查看详情</a></td>" +
-                                "</tr>";
-                            $("#info #bottom").before(tr);
+                                "</tr>"
+                            $("#info #bottom").before(tr)
                     })
                 },
                 error:function () {

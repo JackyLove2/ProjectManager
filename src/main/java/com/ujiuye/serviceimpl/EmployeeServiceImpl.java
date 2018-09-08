@@ -16,13 +16,13 @@ public class EmployeeServiceImpl implements EmployeeService {
     private EmployeeMapper employeeMapper;
 
     @Override
-    public List<Employee> get_all(HashMap<String, Object> map) {
-        List<Employee> list = employeeMapper.get_all(null);
+    public List<Employee> getEmployee(HashMap<String, Object> map) {
+        List<Employee> list = employeeMapper.getEmployee(map);
         return list;
     }
 
     @Override
-    public int add_one(Employee emp) {
+    public int addOne(Employee emp) {
         int status = employeeMapper.insertSelective(emp);
         return status;
     }

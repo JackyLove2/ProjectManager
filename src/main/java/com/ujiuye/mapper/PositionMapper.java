@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface PositionMapper {
 
-    List<Position> get_all(HashMap<String,Object> map);
+    List<Position> getPosition(HashMap<String,Object> map);
 
     long countByExample(PositionExample example);
 

@@ -11,7 +11,7 @@ public interface EmployeeMapper {
 
     int insertSelective(Employee record);
 
-    List<Employee> get_all(HashMap<String,Object> map);
+    List<Employee> getEmployee(HashMap<String,Object> map);
 
     long countByExample(EmployeeExample example);
 

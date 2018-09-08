@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface PositionService {
 
-    List<Position> get_all_position(HashMap<String,Object> map);
+    List<Position> getPosition(HashMap<String,Object> map);
 }

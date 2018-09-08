@@ -8,26 +8,26 @@
     <script type="application/javascript" language="JavaScript" src="/ProjectManager/static/js/jquery-1.8.1.js"></script>
     <script type="application/javascript" language="JavaScript">
         $(function () {
-            $.get("/ProjectManager/position/get_all.action",function (data,status) {
+            $.get("/ProjectManager/position/getPosition.action",function (data,status) {
                 if (status =="success" ){
                     $(data).each(function (index,item) {
-                        var option = "<option name='pFK'  value='"+item.id+"'>"+item.name+"</option>";
-                        $("#position").append(option);
+                        var option = "<option value='"+item.id+"'>"+item.name+"</option>";
+                        $("#pFk").append(option);
                     })
                 }else{
                     alert("load failed...");
                 }
             })
+       // alert($("#esex").val()+$("#pFK :selected").val())
         })
         
         function submit() {
-            $("#info")[0].action="/ProjectManager/employee/add_one.action"
-            alert("action"+$("#info")[0].action)
+            $("#info")[0].action="/ProjectManager/employee/addOne.action"
             $("#info")[0].submit()
         }
 
         // function on() {
-        //     alert($("#position :selected").val()+"----"+$("#position :selected").attr("name"));
+        //     alert($("#pFK :selected").val()+"----"+$("#pFK :selected").attr("name"));
         // }
     </script>
 </head>
@@ -47,7 +47,7 @@
         </td>
     </tr>
 </table>
-<%--<input type="button" value="jjjjj" onclick="on()"/>--%>
+<%--<input type="button" value="test_pFK" onclick="on()"/>--%>
 <form  id="info" action="">
     <table width="98%" border="0" cellpadding="2" cellspacing="1" bgcolor="#D1DDAA" align="center"
            style="margin-top:8px">
@@ -55,7 +55,7 @@
             <td align="right" bgcolor="#FAFAF1" height="22">职位：</td>
             <td align='left' bgcolor="#FFFFFF" onMouseMove="javascript:this.bgColor='#FCFDEE';"
                 onMouseOut="javascript:this.bgColor='#FFFFFF';" height="22">
-                <select id="position" >
+                <select id="pFk" name="pFk" >
                 </select></td>
         </tr>
         <tr>
@@ -66,9 +66,10 @@
         <tr>
             <td align="right" bgcolor="#FAFAF1" height="22">性别：</td>
             <td align='left' bgcolor="#FFFFFF" onMouseMove="javascript:this.bgColor='#FCFDEE';"
-                onMouseOut="javascript:this.bgColor='#FFFFFF';" height="22"><select id="sex" >
-                <option name="esex" value='男' >男</option>
-                <option name="esex" value='女'>女</option>
+                onMouseOut="javascript:this.bgColor='#FFFFFF';" height="22">
+            <select id="esex" name="esex">
+                <option  value='男'>男</option>
+                <option  value='女'>女</option>
             </select></td>
         </tr>
         <tr>
